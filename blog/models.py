@@ -18,6 +18,7 @@ class Category(models.Model):
 
 class Blog(models.Model):
     title = models.CharField(max_length=120)
+    image = models.FileField(blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category")
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now=True)
