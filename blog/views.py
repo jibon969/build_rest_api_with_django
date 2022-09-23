@@ -1,3 +1,5 @@
+from django.db.models import Q
+from rest_framework.decorators import api_view
 from rest_framework.pagination import LimitOffsetPagination
 
 from .models import Blog
@@ -57,13 +59,26 @@ class BlogDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class BlogSearch(APIView):
-    serializer_class = BlogSerializer
+@api_view(['GET'])
+def bog_search(request):
+    """
+    In the brand list page users can search for a specific brand or related brand  with keywords.
+    To get a search result you have to call this endpoint with a GET method request.
 
-    def get_queryset(self):
-        """
-        This view should return a list of all the purchases
-        for the currently authenticated user.
-        """
-        title = self.request.title
-        return Blog.objects.filter(title__icontains=title)
+    :param request: https://belasea.com/products/api/brand-search/?title=beauty
+    :return: brand-search data
+    """
+
+    query = request.query_params.get('query')
+    if query:
+        if query is not None:
+            queryset = Blog.objects.all()
+            queryset = queryset.filter(
+                Q(title__icontains=query) |
+                Q(title__startswith=query) |
+                Q(title__endswith=query)
+            )
+            serializers = BlogSerializer(queryset, many=True)
+            return Response(serializers.data)
+    else:
+        return Response({"Search doesn't match, no data to show!"}, status=status.HTTP_404_NOT_FOUND)
