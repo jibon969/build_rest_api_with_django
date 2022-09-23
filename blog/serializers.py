@@ -12,13 +12,21 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class BlogSerializer(serializers.ModelSerializer):
     category = serializers.SerializerMethodField("get_category")
+    image = serializers.SerializerMethodField("get_image_url")
 
     class Meta:
         model = Blog
         fields = [
-            'title', 'category', 'description'
+            'title', 'image', 'category', 'description'
         ]
 
     def get_category(self, obj):
         name = obj.category.name
         return name
+
+    def get_image_url(self, model):
+        if model.image and hasattr(model.image, 'url'):
+            return "http://127.0.0.1:8000" + model.image.url
+            # return BASE_URL + model.image.url
+        else:
+            return "https://belasea.sgp1.digitaloceanspaces.com/static/images/logo/no-image-avalable.jpg"
