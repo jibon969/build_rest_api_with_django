@@ -6,6 +6,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = [
+            'id',
             'name'
         ]
 
@@ -17,7 +18,7 @@ class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
         fields = [
-            'title', 'image', 'category', 'description'
+            'id', 'title', 'image', 'category', 'description'
         ]
 
     def get_category(self, obj):
