@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from .models import Movie
+from django.http import JsonResponse
 
-# Create your views here.
+
+def move_list(request):
+    movie = Movie.objects.all()
+    data = {
+        "movie": movie
+    }
+    return JsonResponse(data)
+
