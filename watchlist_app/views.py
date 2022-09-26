@@ -3,9 +3,9 @@ from django.http import JsonResponse
 
 
 def move_list(request):
-    movie = Movie.objects.all()
+    movie = Movie.objects.all()  # python dictionary object
     data = {
-        "movie": movie
+        "movie": list(movie.values())
     }
     return JsonResponse(data)
 
