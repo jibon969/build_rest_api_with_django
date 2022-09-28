@@ -24,13 +24,22 @@ def movie_detail(request, pk):
 """
 
 from rest_framework.response import Response
-
+from rest_framework.decorators import api_view
 from .models import Movie
 from .serializers import MovieSerializers
 
 
+@api_view(['GET', 'POST'])
 def move_list(request):
     queryset = Movie.objects.all()
     serializer = MovieSerializers(queryset, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET', 'POST'])
+def movie_detail(request, pk):
+    queryset = Movie.objects.get(pk=pk)
+    serializer = MovieSerializers(queryset)
+    return Response(serializer.data)
+
 
