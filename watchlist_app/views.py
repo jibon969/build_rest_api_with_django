@@ -42,5 +42,11 @@ def movie_detail(request, pk):
         queryset = Movie.objects.get(pk=pk)
         serializer = MovieSerializers(queryset)
         return Response(serializer.data)
+    
+    if request.method == "PUT":
+        queryset = Movie.objects.get(pk=pk)
+        serializer = MovieSerializers(queryset, data=request.data)
+        return Response(serializer.data)
+
 
 
