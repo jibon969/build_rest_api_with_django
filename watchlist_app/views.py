@@ -36,10 +36,11 @@ def move_list(request):
     return Response(serializer.data)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def movie_detail(request, pk):
-    queryset = Movie.objects.get(pk=pk)
-    serializer = MovieSerializers(queryset)
-    return Response(serializer.data)
+    if request.method == "GET":
+        queryset = Movie.objects.get(pk=pk)
+        serializer = MovieSerializers(queryset)
+        return Response(serializer.data)
 
 
