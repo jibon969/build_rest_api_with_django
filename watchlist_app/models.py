@@ -12,3 +12,10 @@ class Movie(models.Model):
         return self.name
 
 
+class Award(models.Model):
+    name = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name.name
+
