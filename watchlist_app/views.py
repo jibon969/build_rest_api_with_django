@@ -36,6 +36,24 @@ def move_list(request):
     return Response(serializer.data)
 
 
+@api_view(['GET', 'POST'])
+def move_list(request):
+    """
+    List all code Movie, or create a new Movie.
+    """
+    if request.method == 'GET':
+        movies = Movie.objects.all()
+        serializer = MovieSerializers(movies, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = MovieSerializers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 @api_view(['GET', 'PUT', 'DELETE'])
 def movie_detail(request, pk):
     if request.method == "GET":
