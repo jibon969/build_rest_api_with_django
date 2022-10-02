@@ -69,7 +69,7 @@ def movie_detail(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def award_list(request):
     """
     List all code Award, or create a new Award.
@@ -78,3 +78,10 @@ def award_list(request):
         awards = Award.objects.all()
         serializer = AwardSerializers(awards, many=True)
         return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = AwardSerializers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

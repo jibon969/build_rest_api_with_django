@@ -6,7 +6,6 @@ class MovieSerializers(serializers.ModelSerializer):
     class Meta:
         model = Movie
         fields = [
-            'id',
             'name',
             'description',
             'active'
@@ -19,7 +18,12 @@ class AwardSerializers(serializers.ModelSerializer):
     class Meta:
         model = Award
         fields = [
-            'id',
-            'name',
+            'award',
             'description',
         ]
+
+    def create(self, validated_data):
+        award_data = validated_data.pop('award')
+        award = Award.objects.create(**validated_data)
+        movie_obj = Movie.objects.create(name=award, **award_data)
+        return movie_obj
