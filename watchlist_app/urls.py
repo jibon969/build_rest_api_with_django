@@ -5,6 +5,9 @@ from . import views
 urlpatterns = [
     path('movie/', views.move_list),
     path('movie/<int:pk>/', views.movie_detail),
+
+    path('award-list/', views.award_list),
+
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

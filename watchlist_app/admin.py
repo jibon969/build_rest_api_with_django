@@ -13,7 +13,7 @@ admin.site.register(Movie, MovieAdmin)
 
 
 class AwardAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['description']
 
     class Meta:
         model = Award
