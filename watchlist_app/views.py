@@ -25,15 +25,8 @@ def movie_detail(request, pk):
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Movie
-from .serializers import MovieSerializers
-
-
-@api_view(['GET', 'POST'])
-def move_list(request):
-    queryset = Movie.objects.all()
-    serializer = MovieSerializers(queryset, many=True)
-    return Response(serializer.data)
+from .models import Movie, Award
+from .serializers import MovieSerializers, AwardSerializers
 
 
 @api_view(['GET', 'POST'])
@@ -76,4 +69,12 @@ def movie_detail(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-
+@api_view(['GET'])
+def award_list(request):
+    """
+    List all code Award, or create a new Award.
+    """
+    if request.method == 'GET':
+        awards = Award.objects.all()
+        serializer = AwardSerializers(awards, many=True)
+        return Response(serializer.data)
