@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Movie
+from .models import Movie, Award
 
 
 class MovieAdmin(admin.ModelAdmin):
@@ -10,3 +10,13 @@ class MovieAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Movie, MovieAdmin)
+
+
+class AwardAdmin(admin.ModelAdmin):
+    list_display = ['name']
+
+    class Meta:
+        model = Award
+
+
+admin.site.register(Award, AwardAdmin)
