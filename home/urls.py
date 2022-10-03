@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('student-list/', views.student_list),
+    path('student-details/<int:pk>/', views.student_details),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
