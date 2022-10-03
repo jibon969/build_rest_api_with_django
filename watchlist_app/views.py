@@ -25,8 +25,8 @@ def movie_detail(request, pk):
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Movie, Award
-from .serializers import MovieSerializers, AwardSerializers
+from .models import Movie, Award, Track, Album
+from .serializers import MovieSerializers, AwardSerializers, AlbumSerializer, TrackSerializer
 
 
 @api_view(['GET', 'POST'])
@@ -81,6 +81,24 @@ def award_list(request):
 
     elif request.method == 'POST':
         serializer = AwardSerializers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'POST'])
+def album_list(request):
+    """
+    List all code Award, or create a new Award.
+    """
+    if request.method == 'GET':
+        awards = Album.objects.all()
+        serializer = AlbumSerializer(awards, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = AlbumSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
