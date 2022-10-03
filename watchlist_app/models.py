@@ -9,7 +9,7 @@ class Movie(models.Model):
     active = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.active
+        return self.name
 
 
 class Award(models.Model):
