@@ -7,7 +7,6 @@ urlpatterns = [
     path('movie/<int:pk>/', views.movie_detail),
 
     path('award-list/', views.award_list),
-    path('album-list/', views.album_list),
 
 ]
 
