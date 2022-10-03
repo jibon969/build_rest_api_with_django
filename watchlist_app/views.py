@@ -22,9 +22,8 @@ def movie_detail(request, pk):
     return JsonResponse(data)
 
 """
-from django.shortcuts import get_object_or_404
-from rest_framework import status
 
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Movie, Award
