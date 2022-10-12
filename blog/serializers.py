@@ -31,3 +31,15 @@ class BlogSerializer(serializers.ModelSerializer):
             # return BASE_URL + model.image.url
         else:
             return "https://belasea.sgp1.digitaloceanspaces.com/static/images/logo/no-image-avalable.jpg"
+
+    def create(self, validated_data):
+        Blog.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
+        instance.image = validated_data.get('image', instance.image)
+        instance.category = validated_data.get('category', instance.category)
+        instance.description = validated_data.get('description', instance.description)
+        instance.save()
+        return instance
+
