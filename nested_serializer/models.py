@@ -13,7 +13,7 @@ class Profile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.mobile
+        return self.display_name
 
 
 class Hobby(models.Model):
