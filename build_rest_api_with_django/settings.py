@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     # For Api
     'corsheaders',
+    'django_cleanup',  # should be placed after your apps
+
 ]
 
 MIDDLEWARE = [
