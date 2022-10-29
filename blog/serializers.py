@@ -26,7 +26,7 @@ class BlogSerializer(serializers.ModelSerializer):
             return "http://127.0.0.1:8000" + model.image.url
             # return BASE_URL + model.image.url
         else:
-            return "https://belasea.sgp1.digitaloceanspaces.com/static/images/logo/no-image-avalable.jpg"
+            return "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1200px-No_image_3x4.svg.png"
 
 
 
