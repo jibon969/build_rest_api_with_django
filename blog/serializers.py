@@ -28,6 +28,12 @@ class BlogSerializer(serializers.ModelSerializer):
         else:
             return "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/No_image_3x4.svg/1200px-No_image_3x4.svg.png"
 
+    def create(self, validated_data):
+        category = validated_data.pop("category")
+        category_obj = Category.objects.create(**category)
+        blog = Blog.objects.create(category=category_obj, **validated_data)
+        return blog
+
 
 
 
