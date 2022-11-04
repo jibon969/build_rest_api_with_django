@@ -1,4 +1,3 @@
-
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
@@ -18,7 +17,12 @@ def student_list(request):
     if request.method == 'GET':
         queryset = Student.objects.all()
         serializer = StudentSerializers(queryset, many=True)
-        return Response(serializer.data)
+        context = {
+            "status": True,
+            "msg": "User successfully updated !",
+            "results": serializer.data,
+        }
+        return Response(context)
 
     elif request.method == 'POST':
         serializer = StudentSerializers(data=request.data)
