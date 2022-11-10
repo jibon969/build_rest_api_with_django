@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('', include('nested_serializer.urls')),
     path('', include('watchlist_app.urls')),
+    path('', include('products.urls')),
 ]
 
 if settings.DEBUG:

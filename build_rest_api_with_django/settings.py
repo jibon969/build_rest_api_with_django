@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'home.apps.HomeConfig',
     'nested_serializer.apps.NestedSerializerConfig',
+    'products.apps.ProductsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -135,7 +136,6 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -146,15 +146,13 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100
 }
 
-CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+CORS_ALLOW_ALL_ORIGINS = True  # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3030',
-	'http://localhost:3000',
-	"http://127.0.0.1:8000",
-] # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
+    'http://localhost:3000',
+    "http://127.0.0.1:8000",
+]  # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
 CORS_ALLOWED_ORIGIN_REGEXES = [
     'http://localhost:3030',
 ]
-
-
