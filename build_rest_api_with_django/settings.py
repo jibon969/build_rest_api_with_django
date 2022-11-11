@@ -33,8 +33,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'home.apps.HomeConfig',
     'nested_serializer.apps.NestedSerializerConfig',
-    'products.apps.ProductsConfig',
     'carts.apps.CartsConfig',
+    'products.apps.ProductsConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
