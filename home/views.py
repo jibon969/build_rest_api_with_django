@@ -44,16 +44,35 @@ def student_details(request, pk):
 
     if request.method == 'GET':
         serializer = StudentSerializers(queryset)
-        return JsonResponse(serializer.data)
+        context = {
+            "status": True,
+            "msg": "Get Blog Data",
+            "data": serializer.data,
+        }
+        return JsonResponse(context)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
         serializer = StudentSerializers(queryset, data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
+            context = {
+                "status": True,
+                "msg": "PUT Blog Data",
+                "data": serializer.data,
+            }
+            return JsonResponse(context)
+        context = {
+            "status": True,
+            "msg": "Please try again !",
+            "data": serializer.errors,
+        }
+        return JsonResponse(context, status=400)
 
     elif request.method == 'DELETE':
         queryset.delete()
-        return HttpResponse(status=204)
+        context = {
+            "status": True,
+            "msg": "Delete Blog Data",
+        }
+        return HttpResponse(context, status=204)
