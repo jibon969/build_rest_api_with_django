@@ -59,6 +59,36 @@ class BlogDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+class BlogDetailSlug(APIView):
+    """
+    Retrieve, update or delete a snippet instance.
+    """
+
+    def get_object(self, slug):
+        try:
+            return Blog.objects.get(slug=slug)
+        except Blog.DoesNotExist:
+            raise Http404
+
+    def get(self, request, slug, format=None):
+        snippet = self.get_object(slug)
+        serializer = BlogSerializer(snippet)
+        return Response(serializer.data)
+
+    def put(self, request, slug, format=None):
+        snippet = self.get_object(slug)
+        serializer = BlogSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, slug, format=None):
+        blog = self.get_object(slug)
+        blog.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 @api_view(['GET'])
 def bog_search(request):
     """
