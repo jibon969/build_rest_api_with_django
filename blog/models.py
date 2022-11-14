@@ -1,4 +1,4 @@
-from time import timezone
+from datetime import datetime  
 
 from django.db import models
 from django.utils.text import slugify
@@ -40,7 +40,7 @@ class Comment(models.Model):
     post = models.ForeignKey('Blog', on_delete=models.CASCADE, related_name='comments')
     author = models.CharField(max_length=200)
     text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(default=datetime.now(), blank=True)
     approved_comment = models.BooleanField(default=False)
 
     def approve(self):
