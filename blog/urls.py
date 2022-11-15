@@ -7,6 +7,7 @@ urlpatterns = [
     path('blog/<int:pk>/', views.BlogDetail.as_view()),
     path('blog/detail/<slug:slug>/', views.BlogDetailSlug.as_view()),
     path('blog-search/', views.bog_search),
+    path('comment-list/', views.CommentList.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
