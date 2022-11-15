@@ -1,9 +1,8 @@
 from django.db.models import Q
 from rest_framework.decorators import api_view
 from rest_framework.pagination import LimitOffsetPagination
-
-from .models import Blog
-from .serializers import BlogSerializer
+from .models import Blog, Comment
+from .serializers import BlogSerializer, CommentSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -112,3 +111,22 @@ def bog_search(request):
             return Response(serializers.data)
     else:
         return Response({"Search doesn't match, no data to show!"}, status=status.HTTP_404_NOT_FOUND)
+
+
+class CommentList(APIView, LimitOffsetPagination):
+    """
+    List all Comment, or create a new Comment.
+    """
+
+    def get(self, request, format=None):
+        queryset = Comment.objects.all()
+        results = self.paginate_queryset(queryset, request, view=self)
+        serializer = CommentSerializer(results, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
