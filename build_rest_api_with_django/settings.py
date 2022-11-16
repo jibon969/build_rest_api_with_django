@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'watchlist_app.apps.WatchlistAppConfig',
     'blog.apps.BlogConfig',
     'home.apps.HomeConfig',
+    'accounts.apps.AccountsConfig',
     'nested_serializer.apps.NestedSerializerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
