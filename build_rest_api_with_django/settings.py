@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'watchlist_app.apps.WatchlistAppConfig',
     'blog.apps.BlogConfig',
     'home.apps.HomeConfig',
-    'accounts.apps.AccountsConfig',
     'nested_serializer.apps.NestedSerializerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,11 +46,11 @@ INSTALLED_APPS = [
     'django_cleanup',  # should be placed after your apps
 ]
 
-AUTH_USER_MODEL = 'accounts.User'
-LOGIN_URL = '/login/'
-LOGIN_URL_REDIRECT = '/'
-LOGOUT_URL = '/logout/'
-LOGOUT_REDIRECT_URL = '/'
+# AUTH_USER_MODEL = 'accounts.User'
+# LOGIN_URL = '/login/'
+# LOGIN_URL_REDIRECT = '/'
+# LOGOUT_URL = '/logout/'
+# LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
