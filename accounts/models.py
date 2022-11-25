@@ -21,8 +21,15 @@ DEFAULT_ACTIVATION_DAYS = getattr(settings, 'DEFAULT_ACTIVATION_DAYS', 7)
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, password=None, first_name=None, last_name=None, dob=None, gender=None,
-                    contact_number=None):
+    def create_user(
+            self, email,
+            password=None,
+            first_name=None,
+            last_name=None,
+            dob=None,
+            gender=None,
+            contact_number=None
+    ):
         """
         Creates and saves a User with the given email and password.
         """
