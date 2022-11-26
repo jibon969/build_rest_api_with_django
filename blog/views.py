@@ -116,6 +116,12 @@ def bog_search(request):
 class CommentList(APIView, LimitOffsetPagination):
     """
     List all Comment, or create a new Comment.
+    {
+        "post": 1,
+        "author": "Jibon",
+        "text": "Hello there",
+        "approved_comment": false
+    }
     """
 
     def get(self, request, format=None):
