@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('', include('home.urls')),
+    path('', include('contact.urls')),
     path('', include('nested_serializer.urls')),
     path('', include('watchlist_app.urls')),
 ]
