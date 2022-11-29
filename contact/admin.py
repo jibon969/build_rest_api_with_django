@@ -3,12 +3,11 @@ from .models import Contact
 
 
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ['title', 'name', 'email']
+    list_display = ['name', 'email']
     
     class Meta:
         model = Contact
         fields = [
-            'title',
             'name',
             'email'
         ]
