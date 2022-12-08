@@ -11,7 +11,7 @@ from django.http import Http404
 
 class BlogList(APIView, LimitOffsetPagination):
     """
-    List all snippets, or create a new snippet.
+    List all Blog, or create a new Blog.
     """
 
     def get(self, request, format=None):
@@ -30,7 +30,7 @@ class BlogList(APIView, LimitOffsetPagination):
 
 class BlogDetail(APIView):
     """
-    Retrieve, update or delete a snippet instance.
+    Retrieve, update or delete a Blog instance.
     """
 
     def get_object(self, pk):
@@ -60,7 +60,7 @@ class BlogDetail(APIView):
 
 class BlogDetailSlug(APIView):
     """
-    Retrieve, update or delete a snippet instance.
+    Retrieve, update or delete a Blog instance.
     """
 
     def get_object(self, slug):
@@ -91,11 +91,11 @@ class BlogDetailSlug(APIView):
 @api_view(['GET'])
 def bog_search(request):
     """
-    In the brand list page users can search for a specific brand or related brand  with keywords.
+    In the Blog list page users can search for a specific brand or related brand  with keywords.
     To get a search result you have to call this endpoint with a GET method request.
 
-    :param request: https://belasea.com/products/api/brand-search/?title=beauty
-    :return: brand-search data
+    :param request: 
+    :return: blog-search data
     """
 
     query = request.query_params.get('query')
