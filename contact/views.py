@@ -150,7 +150,7 @@ class ContactDetail(APIView):
         }
         return Response(context, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
+    def delete(self, pk):
         queryset = self.get_object(pk)
         queryset.delete()
         context = {
