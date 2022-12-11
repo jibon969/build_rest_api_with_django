@@ -62,7 +62,6 @@ class BlogDetailSlug(APIView):
     """
     Retrieve, update or delete a Blog instance.
     """
-
     def get_object(self, slug):
         try:
             return Blog.objects.get(slug=slug)
