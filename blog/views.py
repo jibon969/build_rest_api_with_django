@@ -90,14 +90,6 @@ class BlogDetailSlug(APIView):
 
 @api_view(['GET'])
 def bog_search(request):
-    """
-    In the Blog list page users can search for a specific brand or related brand  with keywords.
-    To get a search result you have to call this endpoint with a GET method request.
-
-    :param request: 
-    :return: blog-search data
-    """
-
     query = request.query_params.get('query')
     if query:
         if query is not None:
