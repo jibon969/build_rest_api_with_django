@@ -9,9 +9,10 @@ class ProfileList(APIView):
     """
     List all Profile, or create a new snippet.
     """
+
     def get(self, request, format=None):
-        snippets = Profile.objects.all()
-        serializer = ProfileSerializer(snippets, many=True)
+        queryset = Profile.objects.all()
+        serializer = ProfileSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
