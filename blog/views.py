@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
+from rest_framework import generics
 
 
 class BlogList(APIView, LimitOffsetPagination):
@@ -62,6 +63,7 @@ class BlogDetailSlug(APIView):
     """
     Retrieve, update or delete a Blog instance.
     """
+
     def get_object(self, slug):
         try:
             return Blog.objects.get(slug=slug)
@@ -127,3 +129,15 @@ class CommentList(APIView, LimitOffsetPagination):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PurchaseList(generics.ListAPIView):
+    serializer_class = BlogSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the purchases
+        for the currently authenticated user.
+        """
+        user = self.request.user
+        return Blog.objects.filter(title__icontains=user)
