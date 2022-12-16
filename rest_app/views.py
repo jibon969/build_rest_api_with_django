@@ -57,6 +57,7 @@ class SnippetDetail(APIView):
     """
     Retrieve, update or delete a snippet instance.
     """
+
     def get_object(self, pk):
         try:
             return Snippet.objects.get(pk=pk)
@@ -66,7 +67,12 @@ class SnippetDetail(APIView):
     def get(self, request, pk, format=None):
         snippet = self.get_object(pk)
         serializer = SnippetSerializer(snippet)
-        return Response(serializer.data)
+        context = {
+            "status": False,
+            "message": "Get all Snippet list",
+            "data": serializer.data
+        }
+        return Response(context)
 
     def put(self, request, pk, format=None):
         snippet = self.get_object(pk)
@@ -78,5 +84,9 @@ class SnippetDetail(APIView):
 
     def delete(self, request, pk, format=None):
         snippet = self.get_object(pk)
+        context = {
+            "status": False,
+            "message": "Delete Snippet",
+        }
         snippet.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(context, status=status.HTTP_204_NO_CONTENT)
