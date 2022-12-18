@@ -100,19 +100,38 @@ def snippet_detail(request, pk):
 
     if request.method == 'GET':
         serializer = SnippetSerializer(snippet)
-        return JsonResponse(serializer.data)
+        context = {
+            "status": True,
+            "message": "Get single snippet",
+            "data": serializer.data
+        }
+        return JsonResponse(context, status=status.HTTP_200_OK)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
         serializer = SnippetSerializer(snippet, data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
+            context = {
+                "status": True,
+                "message": "Get single snippet",
+                "data": serializer.data
+            }
+            return JsonResponse(context, status=status.HTTP_201_CREATED)
+        context = {
+            "status": True,
+            "message": "Get single snippet",
+            "data": serializer.errors
+        }
+        return JsonResponse(context, status=status.HTTP_404_NOT_FOUND)
 
     elif request.method == 'DELETE':
         snippet.delete()
-        return HttpResponse(status=204)
+        context = {
+            "status": True,
+            "message": "Get single snippet",
+        }
+        return HttpResponse(context, status=status.HTTP_204_NO_CONTENT)
 
 
 class SnippetDetail(APIView):
