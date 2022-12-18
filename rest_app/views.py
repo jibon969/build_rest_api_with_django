@@ -16,15 +16,30 @@ def snippet_list(request):
     if request.method == 'GET':
         snippets = Snippet.objects.all()
         serializer = SnippetSerializer(snippets, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        context = {
+            "status": True,
+            "message": "Get all Snippet list",
+            "data": serializer.data
+        }
+        return JsonResponse(context, safe=False)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = SnippetSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            context = {
+                "status": True,
+                "message": "Successfully created new Snippet",
+                "data": serializer.data
+            }
+            return JsonResponse(context, status=201)
+        context = {
+            "status": False,
+            "message": "Successfully created new Snippet",
+            "data": serializer.errors
+        }
+        return JsonResponse(context, status=400)
 
 
 class SnippetView(APIView):
@@ -120,4 +135,3 @@ class SnippetDetail(APIView):
         }
         snippet.delete()
         return Response(context, status=status.HTTP_204_NO_CONTENT)
-
