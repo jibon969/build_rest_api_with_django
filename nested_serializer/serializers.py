@@ -19,3 +19,9 @@ class HobbySerializer(serializers.ModelSerializer):
             'status'
         ]
 
+    def create(self, validated_data):
+        user_data = validated_data.pop('user')
+        user = Hobby.objects.create(**validated_data)
+        for user in user_data:
+            Profile.objects.create(user=user, **user)
+        return user
