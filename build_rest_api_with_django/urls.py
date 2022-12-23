@@ -25,7 +25,6 @@ urlpatterns = [
     path('', include('home.urls')),
     path('', include('contact.urls')),
     path('', include('rest_app.urls')),
-    path('', include('nested_serializer.urls')),
     path('', include('watchlist_app.urls')),
 ]
 
