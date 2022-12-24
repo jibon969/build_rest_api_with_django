@@ -1,8 +1,8 @@
 from django.http import HttpResponse, JsonResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from .models import Snippet
-from .serializers import SnippetSerializer
+from .models import Snippet, Album, Track
+from .serializers import SnippetSerializer, AlbumSerializer, TrackSerializer
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
@@ -181,3 +181,17 @@ class SnippetDetail(APIView):
         }
         snippet.delete()
         return Response(context, status=status.HTTP_204_NO_CONTENT)
+
+
+class AlbumAPIView(APIView):
+
+    def get(self):
+        queryset = Album.objects.all()
+        serializer = AlbumSerializer(queryset, many=True)
+        context = {
+            "status": True,
+            "message": "Get all Album list",
+            "data": serializer.data
+        }
+        return Response(context, status=status.HTTP_200_OK)
+
