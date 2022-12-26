@@ -247,6 +247,41 @@ class AlbumDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+class TrackAPIView(APIView):
+
+    def get(self, request):
+        queryset = Track.objects.all()
+        serializer = TrackSerializer(queryset, many=True)
+        context = {
+            "status": True,
+            "message": "Get all Track list",
+            "data": serializer.data
+        }
+        return Response(context, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        """
+        :param request:
+        :return:
+        """
+        serializer = TrackSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            context = {
+                "status": True,
+                "message": "Successfully created new Track",
+                "data": serializer.data
+            }
+            return Response(context, status=status.HTTP_201_CREATED)
+        else:
+            context = {
+                "status": False,
+                "message": "Successfully created new Album",
+                "data": serializer.errors
+            }
+            return Response(context, status=status.HTTP_400_BAD_REQUEST)
+
+
 class TrackDetail(APIView):
     """
     Retrieve, update or delete a Track instance.
